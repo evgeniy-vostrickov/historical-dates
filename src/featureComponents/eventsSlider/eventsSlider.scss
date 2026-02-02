@@ -1,0 +1,62 @@
+@use '@/styles/colors';
+
+.events-slider {
+    &__wrapper {
+        position: relative;
+        max-width: 1200px;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    &__next, &__prev {
+        position: absolute;
+        top: 50%;
+        width: 40px;
+        height: 40px;
+        background-color: #FFFFFF;
+        border: none;
+        box-shadow: 0 0 15px rgba(56, 119, 238, 0.1);
+        &.swiper-button-disabled {
+            display: none;
+        }
+    }
+
+    &__prev {
+        transform: translate(0, -50%) rotate(180deg);
+        left: -60px;
+    }
+
+    &__next {
+        transform: translate(0, -50%);
+        right: -60px;
+    }
+
+    &__navigation-icon {
+        stroke: colors.$color-blue;
+        stroke-width: 2px;
+        height: 12px;
+    }
+
+    &__pagination .swiper-pagination-bullet-active {
+        background: colors.$color-gray;
+    }
+}
+
+@media (max-width: 768px) {
+    .events-slider {
+        &__next, &__prev {
+            display: none;
+        }
+        .swiper-slide-next {
+            opacity: 0.4;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .events-slider {
+        &__pagination {
+            display: none;
+        }
+    }
+}

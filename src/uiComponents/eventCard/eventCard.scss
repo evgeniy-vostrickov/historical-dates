@@ -1,0 +1,25 @@
+@use '@/styles/colors';
+@use '@/styles/variables';
+
+.event-card {
+    min-width: 320px;
+    max-width: 400px;
+
+    &__title {
+        font-family: variables.$font-secondary;
+        font-size: 25px;
+        font-weight: 700;
+        line-height: 120%;
+        color: colors.$color-blue;
+        margin-bottom: 15px;
+    }
+
+    &__description {
+        line-height: 1.5;
+        color: colors.$color-gray;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
+}
