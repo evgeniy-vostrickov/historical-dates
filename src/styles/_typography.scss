@@ -1,0 +1,7 @@
+@use './variables';
+
+@mixin text-base {
+  font-family: variables.$font-primary;
+  font-size: 20px;
+  line-height: 1.5;
+}
