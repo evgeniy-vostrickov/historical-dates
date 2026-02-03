@@ -1,11 +1,9 @@
-import EventsSlider from './featureComponents/eventsSlider/EventsSlider';
+import HistoricalDatesSection from '@/featureComponents/historicalDatesSection/HistoricalDatesSection';
 import './App.scss'
 
 const App = () => {
     return (
-        <>
-            <EventsSlider />
-        </>
+        <HistoricalDatesSection />
     )
 };
 

@@ -1,0 +1,120 @@
+@use '@/styles/colors';
+@use '@/styles/functions';
+
+.historical-dates {
+    position: relative;
+    max-width: 1440px;
+    margin: 0 auto;
+
+    &__wrapper {
+        padding: 170px 0 104px 0;
+        height: 1080px;
+    }
+
+    &__horizontal-line, &__vertical-line {
+        position: absolute;
+        background-color: functions.alpha(colors.$color-gray, 0.1);
+    }
+
+    &__horizontal-line {
+        width: 100%;
+        height: 1px;
+        top: 480px;
+    }
+
+    &__vertical-line {
+        height: 100%;
+        width: 1px;
+        top: 0;
+        
+        &.position-lf {
+            left: 0;
+        }
+
+        &.position-cn {
+            left: 720px;
+        }
+
+        &.position-rg {
+            right: 0;
+        }
+    }
+
+    &__period {
+        display: flex;
+        gap: 50px;
+        position: absolute;
+        top: 400px;
+        left: 217px;
+    }
+
+    &__begin-year {
+        color: colors.$color-purple;
+    }
+
+    &__end-year {
+        color: colors.$color-pink;
+    }
+
+    &__switch-period {
+        position: absolute;
+        left: 80px;
+        bottom: 295px;
+    }
+}
+
+@media (max-width: 1480px) {
+    .historical-dates {
+        margin: 0 20px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .historical-dates {
+        &__wrapper {
+            padding: 100px 0 54px 0;
+        }
+
+        &__period {
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .historical-dates {
+        &__wrapper {
+            padding: 70px 0 25px 0;
+        }
+
+        &__period {
+            gap: 20px;
+            top: 250px;
+        }
+
+        &__horizontal-line {
+            top: 340px;
+        }
+
+        &__vertical-line {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .historical-dates {
+        &__period {
+            top: 163px;
+        }
+
+        &__horizontal-line {
+            top: 293px;
+        }
+
+        &__wrapper {
+            padding: 59px 0 20px 0;
+        }
+    }
+}
