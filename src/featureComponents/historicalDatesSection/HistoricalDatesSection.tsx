@@ -1,6 +1,7 @@
 import HeaderGradient from '@/uiComponents/headerGradient/HeaderGradient';
 import YearPeriod from '@/uiComponents/yearPeriod/YearPeriod';
 import SwitchPeriod from '@/featureComponents/switchPeriod/SwitchPeriod';
+import EventsSlider from '@/featureComponents/eventsSlider/EventsSlider';
 import './historicalDatesSection.scss';
 
 const HistoricalDatesSection: React.FC = () => {
@@ -14,6 +15,9 @@ const HistoricalDatesSection: React.FC = () => {
                 </div>
                 <div className="historical-dates__switch-period">
                     <SwitchPeriod currentPeriod={1} totalPeriod={6} />
+                </div>
+                <div className="historical-dates__events-slider">
+                    <EventsSlider />
                 </div>
             </div>
             <div className="historical-dates__horizontal-line"></div>

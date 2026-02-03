@@ -10,7 +10,7 @@ import './eventsSlider.scss';
 
 const EventsSlider = () => {
     return (
-        <div className='events-slider__wrapper'>
+        <div className="events-slider__wrapper">
             <RoundContainer containerClassName="events-slider__prev">
                 <ArrowIcon className="events-slider__navigation-icon" />
             </RoundContainer>
@@ -38,12 +38,16 @@ const EventsSlider = () => {
                         spaceBetween: 40,
                         pagination: false,
                     },
-                    0: {
-                        slidesPerView: 1.5,
-                        spaceBetween: 10,
+                    576: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
                         navigation: false,
                         freeMode: false,
                     },
+                    0: {
+                        slidesPerView: 1.5,
+                        spaceBetween: 10,
+                    }
                 }}
                 modules={[Navigation, FreeMode, Pagination]}
             >
@@ -52,10 +56,8 @@ const EventsSlider = () => {
                 <SwiperSlide><EventCard eventYear={2015} eventDescription='13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' /></SwiperSlide>
                 <SwiperSlide><EventCard eventYear={2015} eventDescription='13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' /></SwiperSlide>
                 <SwiperSlide><EventCard eventYear={2015} eventDescription='13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' /></SwiperSlide>
-                <SwiperSlide><EventCard eventYear={2015} eventDescription='13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' /></SwiperSlide>
-                <SwiperSlide><EventCard eventYear={2015} eventDescription='13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' /></SwiperSlide>
-                <div className="events-slider__pagination" />
             </Swiper>
+            <div className="events-slider__pagination" />
         </div>
     );
 }

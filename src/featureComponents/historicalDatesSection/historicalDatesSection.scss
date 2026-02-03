@@ -46,6 +46,7 @@
         position: absolute;
         top: 400px;
         left: 217px;
+        z-index: 10;
     }
 
     &__begin-year {
@@ -61,11 +62,22 @@
         left: 80px;
         bottom: 295px;
     }
+
+    &__events-slider {
+        position: absolute;
+        bottom: 104px;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
 }
 
 @media (max-width: 1480px) {
     .historical-dates {
         margin: 0 20px;
+
+        &__events-slider {
+            width: 95%;
+        }
     }
 }
 
@@ -100,6 +112,15 @@
         &__vertical-line {
             display: none;
         }
+
+        &__events-slider {
+            bottom: 141px;
+        }
+
+        &__switch-period {
+            left: 0px;
+            bottom: 14px;
+        }
     }
 }
 
@@ -115,6 +136,10 @@
 
         &__wrapper {
             padding: 59px 0 20px 0;
+        }
+
+        &__events-slider {
+            width: 100%;
         }
     }
 }
