@@ -1,0 +1,49 @@
+@use '@/styles/colors';
+@use '@/styles/functions';
+
+// .container {
+//     width: 1700px;
+//     height: 1200px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+.orbit {
+    box-sizing: border-box;
+    width: 530px;
+    height: 530px;
+    position: absolute;
+    transform-origin: 50% 50%;
+    border-radius: 50%;
+    border: 1px solid functions.alpha(colors.$color-gray, 0.2);
+
+    &__satellites {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(265px, -50%);
+
+        &__container {
+            width: 6px;
+            height: 6px;
+            transform: translate(-50%, 0);
+            background-color: colors.$color-gray;
+            transition: width 400ms, height 400ms;
+            color: colors.$color-gray;
+            
+            &_active {
+                width: 56px;
+                height: 56px;
+                background-color: rgba(244, 245, 249, 1);
+            }
+        }
+
+        &__label {
+            width: 150px;
+            position: absolute;
+            right: -170px;
+            font-weight: bold;
+        }
+    }
+}

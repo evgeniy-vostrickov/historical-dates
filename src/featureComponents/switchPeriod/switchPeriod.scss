@@ -17,6 +17,10 @@
         width: 50px;
         height: 50px;
         background-color: colors.$color-background;
+
+        &:hover {
+            background-color: #FFFFFF;
+        }
     }
 
     &__prev {
