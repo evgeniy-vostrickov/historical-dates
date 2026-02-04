@@ -2,9 +2,12 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { ANGLE_360, BASE_INDENTATION } from '@/const/mathematicalValues';
 import { TPeriod } from '@/featureComponents/historicalDatesSection/HistoricalDatesSection';
 import RoundContainer from '@/uiComponents/roundContainer/RoundContainer';
+import SwitchPeriod from '@/featureComponents/switchPeriod/SwitchPeriod';
 import gsap from 'gsap';
 import classNames from 'classnames';
 import './periodOrbit.scss';
+
+export type TDirectionRotation = 'right' | 'left'
 
 type TPeriodOrbit = {
     periods: TPeriod[];
@@ -17,21 +20,26 @@ const PeriodOrbit: React.FC<TPeriodOrbit> = ({periods, activePeriodId, onChangeC
     const [isRunningAnimation, setIsRunningAnimation] = useState(false);
     const orbit = useRef<HTMLDivElement>(null);
     const currentOrbitAngle = useRef(0);
+    const currentPeriodIndex = useRef(0);
+
+    const onChangePeriod = (directionRotation: TDirectionRotation) => {
+        const newIndex = directionRotation === 'right' ? currentPeriodIndex.current + 1 : currentPeriodIndex.current - 1;
+        onClickSatellite(periods[newIndex].id, newIndex)
+    }
     
     const onClickSatellite = (selectedPeriodId: number, index: number) => {
+        setIsRunningAnimation(true);
         onChangeCurrentPeriodId(selectedPeriodId);
+        currentPeriodIndex.current = index;
         const orbitRotationAgle = (ANGLE_360 / periods.length) * (periods.length - index);
         
         gsap.to(orbit.current, {
             rotation: orbitRotationAgle,
             duration: 1,
-            onStart: () => {
-                setIsRunningAnimation(true)
-            },
             onComplete: () => {
-                setIsRunningAnimation(false)
-                setViewedPeriodId(null)
-                currentOrbitAngle.current = orbitRotationAgle
+                setIsRunningAnimation(false);
+                setViewedPeriodId(null);
+                currentOrbitAngle.current = orbitRotationAgle;
             },
         });
 
@@ -64,37 +72,40 @@ const PeriodOrbit: React.FC<TPeriodOrbit> = ({periods, activePeriodId, onChangeC
     }, [])
 
     return (
-        <div ref={orbit} className="orbit">
-            {
-                periods.map((period, index) => {
-                    const {id: periodId, periodName} = period;
-                    const isHoveredPeriod = viewedPeriodId === periodId;
-                    const isActivedPeriod = activePeriodId === periodId;
-                    
-                    const isShowedPeriodId = isHoveredPeriod || isActivedPeriod;
-                    const isShowedPeriodName = !isRunningAnimation && isActivedPeriod;
-                    
-                    return (
-                        <div 
-                            key={periodId}
-                            className={classNames("orbit__satellites")}
-                            onMouseEnter={() => setViewedPeriodId(periodId)}
-                            onMouseLeave={() => !isRunningAnimation && setViewedPeriodId(null)}
-                            onClick={() => onClickSatellite(periodId, index)}
-                        >
-                            <RoundContainer containerClassName={
-                                classNames("orbit__satellites__container", {
-                                    "orbit__satellites__container_active": isShowedPeriodId
-                                })
-                            }>
-                                {isShowedPeriodId && <span className="orbit__satellites__content">{periodId}</span>}
-                                {isShowedPeriodName && <div className="orbit__satellites__label">{periodName}</div>}
-                            </RoundContainer>
-                        </div>
-                    )
-                })
-            }
-        </div>
+        <>
+            <div ref={orbit} className="orbit">
+                {
+                    periods.map((period, index) => {
+                        const {id: periodId, periodName} = period;
+                        const isHoveredPeriod = viewedPeriodId === periodId;
+                        const isActivedPeriod = activePeriodId === periodId;
+                        
+                        const isShowedPeriodId = isHoveredPeriod || isActivedPeriod;
+                        const isShowedPeriodName = !isRunningAnimation && isActivedPeriod;
+                        
+                        return (
+                            <div 
+                                key={periodId}
+                                className={classNames("orbit__satellites")}
+                                onMouseEnter={() => setViewedPeriodId(periodId)}
+                                onMouseLeave={() => !isRunningAnimation && setViewedPeriodId(null)}
+                                onClick={() => onClickSatellite(periodId, index)}
+                            >
+                                <RoundContainer containerClassName={
+                                    classNames("orbit__satellites__container", {
+                                        "orbit__satellites__container_active": isShowedPeriodId
+                                    })
+                                }>
+                                    {isShowedPeriodId && <span className="orbit__satellites__content">{index + 1}</span>}
+                                    {isShowedPeriodName && <div className="orbit__satellites__label">{periodName}</div>}
+                                </RoundContainer>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+            <SwitchPeriod currentPeriodIndex={currentPeriodIndex.current + 1} totalPeriod={periods.length} isLoading={isRunningAnimation} onChangePeriod={onChangePeriod} />
+        </>
     )
 };
 

@@ -36,6 +36,9 @@
         &_disabled {
             opacity: 0.5;
             cursor: auto;
+            &:hover {
+                background-color: colors.$color-background;
+            }
         }
         &__icon {
             stroke: colors.$color-gray;

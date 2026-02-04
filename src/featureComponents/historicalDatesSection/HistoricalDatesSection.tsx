@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import HeaderGradient from '@/uiComponents/headerGradient/HeaderGradient';
 import YearPeriod from '@/uiComponents/yearPeriod/YearPeriod';
-import SwitchPeriod from '@/featureComponents/switchPeriod/SwitchPeriod';
 import EventsSlider from '@/featureComponents/eventsSlider/EventsSlider';
 import PeriodOrbit from '@/featureComponents/periodOrbit/PeriodOrbit';
 import './historicalDatesSection.scss';
 
-type TPeriodEvents = {
+export type TPeriodEvents = {
     year: number;
     eventDescription: string;
 };
@@ -20,7 +19,7 @@ export type TPeriod = {
 };
 
 const HistoricalDatesSection: React.FC = () => {
-    const [currentPeriodId, setCurrentPeriodId] = useState<number | null>(1); 
+    const [currentPeriodId, setCurrentPeriodId] = useState<number | null>(1);
     const [periods, setPeriods] = useState<TPeriod[]>([
         {
             id: 1,
@@ -192,8 +191,10 @@ const HistoricalDatesSection: React.FC = () => {
         },
     ]);
     
-    const beginYearOfCurrentPeriod = periods.find((period) => period.id === currentPeriodId)?.beginYear ?? null
-    const endYearOfCurrentPeriod = periods.find((period) => period.id === currentPeriodId)?.endYear ?? null
+    const currentPeriodData = periods.find((period) => period.id === currentPeriodId)
+    const beginYearOfCurrentPeriod = currentPeriodData?.beginYear ?? null
+    const endYearOfCurrentPeriod = currentPeriodData?.endYear ?? null
+    const listEvents = currentPeriodData?.events ?? []
 
     const onChangeCurrentPeriodId = (newPeriodId: number | null) => {
         setCurrentPeriodId(newPeriodId)
@@ -210,11 +211,8 @@ const HistoricalDatesSection: React.FC = () => {
                     <YearPeriod year={beginYearOfCurrentPeriod} classList="historical-dates__begin-year" />
                     <YearPeriod year={endYearOfCurrentPeriod} classList="historical-dates__end-year" />
                 </div>
-                <div className="historical-dates__switch-period">
-                    <SwitchPeriod currentPeriod={currentPeriodId} totalPeriod={periods.length} />
-                </div>
                 <div className="historical-dates__events-slider">
-                    <EventsSlider />
+                    <EventsSlider listEvents={listEvents} />
                 </div>
             </div>
             <div className="historical-dates__horizontal-line"></div>

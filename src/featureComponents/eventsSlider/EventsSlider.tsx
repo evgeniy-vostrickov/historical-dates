@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, FreeMode, Pagination } from 'swiper/modules';
+import { TPeriodEvents } from '../historicalDatesSection/HistoricalDatesSection';
 import RoundContainer from '@/uiComponents/roundContainer/RoundContainer';
 import EventCard from '@/uiComponents/eventCard/EventCard';
 import ArrowIcon from '@/assets/icons/arrow.svg';
@@ -8,7 +9,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './eventsSlider.scss';
 
-const EventsSlider = () => {
+type TEventsSlider = {
+    listEvents: TPeriodEvents[];
+}
+
+const EventsSlider: React.FC<TEventsSlider> = ({listEvents}) => {
     return (
         <div className="events-slider__wrapper">
             <RoundContainer containerClassName="events-slider__prev">
@@ -17,6 +22,7 @@ const EventsSlider = () => {
             <RoundContainer containerClassName="events-slider__next">
                 <ArrowIcon className="events-slider__navigation-icon" />
             </RoundContainer>
+            <div className="events-slider__pagination" />
             <Swiper
                 className='events-slider'
                 navigation={{
@@ -51,13 +57,17 @@ const EventsSlider = () => {
                 }}
                 modules={[Navigation, FreeMode, Pagination]}
             >
-                <SwiperSlide><EventCard eventYear={2015} eventDescription='13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' /></SwiperSlide>
-                <SwiperSlide><EventCard eventYear={2015} eventDescription='13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' /></SwiperSlide>
-                <SwiperSlide><EventCard eventYear={2015} eventDescription='13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' /></SwiperSlide>
-                <SwiperSlide><EventCard eventYear={2015} eventDescription='13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' /></SwiperSlide>
-                <SwiperSlide><EventCard eventYear={2015} eventDescription='13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды' /></SwiperSlide>
+                {
+                    listEvents.map((periodEvent) => {
+                        const {year, eventDescription} = periodEvent;
+                        return (
+                            <SwiperSlide>
+                                <EventCard eventYear={year} eventDescription={eventDescription} />
+                            </SwiperSlide>
+                        )
+                    })
+                }
             </Swiper>
-            <div className="events-slider__pagination" />
         </div>
     );
 }

@@ -33,7 +33,7 @@
         }
 
         &.position-cn {
-            left: 720px;
+            left: 50%;
         }
 
         &.position-rg {
@@ -42,14 +42,17 @@
     }
 
     &__period-orbit {
-        width: fit-content;
+        width: 100%;
+        display: flex;
+        justify-content: center;
         position: absolute;
         top: 215px;
-        left: 50%;
         z-index: 10;
 
-        & > .orbit {
-            transform: translate(-50%, 0);
+        & .switch-period {
+            position: absolute;
+            left: 80px;
+            bottom: -40px;
         }
     }
 
@@ -68,12 +71,6 @@
 
     &__end-year {
         color: colors.$color-pink;
-    }
-
-    &__switch-period {
-        position: absolute;
-        left: 80px;
-        bottom: 295px;
     }
 
     &__events-slider {
@@ -111,6 +108,7 @@
     .historical-dates {
         &__wrapper {
             padding: 70px 0 25px 0;
+            height: 700px;
         }
 
         &__period {
@@ -134,11 +132,31 @@
             left: 0px;
             bottom: 14px;
         }
+
+        &__period-orbit {
+            top: auto;
+            left: 0;
+            bottom: 15px;
+            justify-content: start;
+            
+            & .orbit {
+                display: none;
+            }
+
+            & .switch-period {
+                position: relative;
+                left: 0;
+                bottom: 0;
+            }
+        }
     }
 }
 
 @media (max-width: 576px) {
     .historical-dates {
+        &__wrapper {
+            height: 600px;
+        }
         &__period {
             top: 163px;
         }
@@ -147,12 +165,24 @@
             top: 293px;
         }
 
+        &__begin-year {
+            color: colors.$color-blue;
+        }
+
         &__wrapper {
             padding: 59px 0 20px 0;
         }
 
         &__events-slider {
             width: 100%;
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .historical-dates {
+        &__wrapper {
+            height: 568px;
         }
     }
 }
