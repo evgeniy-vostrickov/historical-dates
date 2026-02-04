@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, FreeMode, Pagination } from 'swiper/modules';
 import { TPeriodEvents } from '../historicalDatesSection/HistoricalDatesSection';
@@ -9,36 +8,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './eventsSlider.scss';
-import gsap from 'gsap';
 
 type TEventsSlider = {
     listEvents: TPeriodEvents[];
-    isAnimated: boolean;
 }
 
-const EventsSlider: React.FC<TEventsSlider> = ({isAnimated, listEvents}) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (!containerRef.current) return;
-
-        if (isAnimated) {
-            gsap.to(containerRef.current, {
-                opacity: 0,
-                y: 10,
-                duration: 0.5
-            });
-        } else {
-            gsap.fromTo(
-                containerRef.current,
-                { opacity: 0, y: 10 },
-                { opacity: 1, y: 0, duration: 0.5 }
-            );
-        }
-    }, [isAnimated, listEvents]);
-
+const EventsSlider: React.FC<TEventsSlider> = ({listEvents}) => {
     return (
-        <div className="events-slider__wrapper" ref={containerRef}>
+        <div className="events-slider__wrapper">
             <RoundContainer containerClassName="events-slider__prev">
                 <ArrowIcon className="events-slider__navigation-icon" />
             </RoundContainer>

@@ -80,8 +80,10 @@
         transform: translate(-50%, 0);
     }
 
-    &__period-name {
-        display: none;
+    &__events-slider {
+        &__period-line, &__period-name {
+            display: none;
+        }
     }
 }
 
@@ -120,11 +122,7 @@
             top: 180px;
         }
 
-        &__horizontal-line {
-            top: 380px;
-        }
-
-        &__vertical-line {
+        &__vertical-line, &__horizontal-line {
             display: none;
         }
 
@@ -153,14 +151,24 @@
             }
         }
 
-        &__period-name {
-            display: block;
-            position: absolute;
-            top: 340px;
-            left: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            color: colors.$color-gray;
+        &__events-slider {
+            &__period-name {
+                display: block;
+                position: absolute;
+                top: -55px;
+                font-size: 24px;
+                font-weight: bold;
+                color: colors.$color-gray;
+            }
+
+            &__period-line {
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 1px;
+                top: -20px;
+                background-color: functions.alpha(colors.$color-gray, 0.1);
+            }
         }
     }
 }
@@ -172,10 +180,6 @@
         }
         &__period {
             top: 163px;
-        }
-
-        &__horizontal-line {
-            top: 293px;
         }
 
         &__begin-year {
@@ -190,8 +194,7 @@
             width: 100%;
         }
 
-        &__period-name {
-            top: 260px;
+        &__events-slider__period-name {
             font-size: 22px;
         }
     }
@@ -203,7 +206,7 @@
             height: 568px;
         }
 
-        &__period-name {
+        &__events-slider__period-name {
             font-size: 18px;
         }
     }

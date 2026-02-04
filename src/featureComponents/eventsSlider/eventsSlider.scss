@@ -89,7 +89,7 @@
         }
 
         & .event-card__description {
-            font-size: 14px;
+            font-size: 16px;
         }
 
         & .event-card__title {
@@ -109,6 +109,10 @@
 @media (max-width: 400px) {
     .events-slider {
         height: 120px;
+
+        & .event-card__description {
+            font-size: 14px;
+        }
     }
 }
 

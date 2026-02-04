@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import HeaderGradient from '@/uiComponents/headerGradient/HeaderGradient';
 import YearPeriod from '@/uiComponents/yearPeriod/YearPeriod';
-import EventsSlider from '@/featureComponents/eventsSlider/EventsSlider';
 import PeriodOrbit from '@/featureComponents/periodOrbit/PeriodOrbit';
 import './historicalDatesSection.scss';
+import EventsSliderContainer from '../eventsSliderContainer/EventsSliderContainer';
 
 export type TPeriodEvents = {
     year: number;
@@ -227,11 +227,8 @@ const HistoricalDatesSection: React.FC = () => {
                     <YearPeriod year={beginYearOfCurrentPeriod} classList="historical-dates__begin-year" />
                     <YearPeriod year={endYearOfCurrentPeriod} classList="historical-dates__end-year" />
                 </div>
-                <div className="historical-dates__period-name">
-                    {periodName}
-                </div>
                 <div className="historical-dates__events-slider">
-                    <EventsSlider listEvents={listEvents} isAnimated={isRunningAnimation} />
+                    <EventsSliderContainer listEvents={listEvents} isAnimated={isRunningAnimation} periodName={periodName} />
                 </div>
             </div>
             <div className="historical-dates__horizontal-line"></div>
