@@ -13,11 +13,12 @@ type TPeriodOrbit = {
     periods: TPeriod[];
     activePeriodId: number | null;
     onChangeCurrentPeriodId: (newPeriodId: number | null) => void;
+    isRunningAnimation: boolean;
+    onChangeIsRunningAnimation: (isAnimated: boolean) => void;
 }
 
-const PeriodOrbit: React.FC<TPeriodOrbit> = ({periods, activePeriodId, onChangeCurrentPeriodId}) => {
+const PeriodOrbit: React.FC<TPeriodOrbit> = ({periods, activePeriodId, onChangeCurrentPeriodId, isRunningAnimation, onChangeIsRunningAnimation}) => {
     const [viewedPeriodId, setViewedPeriodId] = useState<number | null>(null);
-    const [isRunningAnimation, setIsRunningAnimation] = useState(false);
     const orbit = useRef<HTMLDivElement>(null);
     const currentOrbitAngle = useRef(0);
     const currentPeriodIndex = useRef(0);
@@ -28,7 +29,7 @@ const PeriodOrbit: React.FC<TPeriodOrbit> = ({periods, activePeriodId, onChangeC
     }
     
     const onClickSatellite = (selectedPeriodId: number, index: number) => {
-        setIsRunningAnimation(true);
+        onChangeIsRunningAnimation(true);
         onChangeCurrentPeriodId(selectedPeriodId);
         currentPeriodIndex.current = index;
         const orbitRotationAgle = (ANGLE_360 / periods.length) * (periods.length - index);
@@ -37,7 +38,7 @@ const PeriodOrbit: React.FC<TPeriodOrbit> = ({periods, activePeriodId, onChangeC
             rotation: orbitRotationAgle,
             duration: 1,
             onComplete: () => {
-                setIsRunningAnimation(false);
+                onChangeIsRunningAnimation(false);
                 setViewedPeriodId(null);
                 currentOrbitAngle.current = orbitRotationAgle;
             },

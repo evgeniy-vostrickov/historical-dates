@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, FreeMode, Pagination } from 'swiper/modules';
 import { TPeriodEvents } from '../historicalDatesSection/HistoricalDatesSection';
@@ -8,21 +9,42 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './eventsSlider.scss';
+import gsap from 'gsap';
 
 type TEventsSlider = {
     listEvents: TPeriodEvents[];
+    isAnimated: boolean;
 }
 
-const EventsSlider: React.FC<TEventsSlider> = ({listEvents}) => {
+const EventsSlider: React.FC<TEventsSlider> = ({isAnimated, listEvents}) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+
+        if (isAnimated) {
+            gsap.to(containerRef.current, {
+                opacity: 0,
+                y: 10,
+                duration: 0.5
+            });
+        } else {
+            gsap.fromTo(
+                containerRef.current,
+                { opacity: 0, y: 10 },
+                { opacity: 1, y: 0, duration: 0.5 }
+            );
+        }
+    }, [isAnimated, listEvents]);
+
     return (
-        <div className="events-slider__wrapper">
+        <div className="events-slider__wrapper" ref={containerRef}>
             <RoundContainer containerClassName="events-slider__prev">
                 <ArrowIcon className="events-slider__navigation-icon" />
             </RoundContainer>
             <RoundContainer containerClassName="events-slider__next">
                 <ArrowIcon className="events-slider__navigation-icon" />
             </RoundContainer>
-            <div className="events-slider__pagination" />
             <Swiper
                 className='events-slider'
                 navigation={{
@@ -68,6 +90,7 @@ const EventsSlider: React.FC<TEventsSlider> = ({listEvents}) => {
                     })
                 }
             </Swiper>
+            <div className="events-slider__pagination" />
         </div>
     );
 }

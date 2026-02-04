@@ -51,12 +51,15 @@
 @media (max-width: 768px) {
     .events-slider {
         margin: 0;
+        height: 150px;
         
         &__next, &__prev {
             display: none;
         }
-
+        
         &__pagination {
+            position: relative;
+            top: 73px !important;
             text-align: center;
         }
 
@@ -67,6 +70,10 @@
         & .event-card {
             min-width: 100px;
             max-width: 245px;
+        }
+
+        .event-card__description {
+            -webkit-line-clamp: 5;
         }
     }
 }
@@ -99,19 +106,16 @@
     }
 }
 
+@media (max-width: 400px) {
+    .events-slider {
+        height: 120px;
+    }
+}
+
 @media (min-width: 768px) {
     .events-slider {
         &__pagination {
             display: none;
-        }
-    }
-}
-
-@media (max-width: 768px) {
-    .events-slider {
-        &__pagination {
-            position: relative;
-            top: 140px !important;
         }
     }
 }

@@ -79,6 +79,10 @@
         left: 50%;
         transform: translate(-50%, 0);
     }
+
+    &__period-name {
+        display: none;
+    }
 }
 
 @media (max-width: 1480px) {
@@ -113,11 +117,11 @@
 
         &__period {
             gap: 20px;
-            top: 250px;
+            top: 180px;
         }
 
         &__horizontal-line {
-            top: 340px;
+            top: 380px;
         }
 
         &__vertical-line {
@@ -125,7 +129,7 @@
         }
 
         &__events-slider {
-            bottom: 141px;
+            bottom: 100px;
         }
 
         &__switch-period {
@@ -134,10 +138,9 @@
         }
 
         &__period-orbit {
+            width: fit-content;
             top: auto;
-            left: 0;
             bottom: 15px;
-            justify-content: start;
             
             & .orbit {
                 display: none;
@@ -148,6 +151,16 @@
                 left: 0;
                 bottom: 0;
             }
+        }
+
+        &__period-name {
+            display: block;
+            position: absolute;
+            top: 340px;
+            left: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: colors.$color-gray;
         }
     }
 }
@@ -176,6 +189,11 @@
         &__events-slider {
             width: 100%;
         }
+
+        &__period-name {
+            top: 260px;
+            font-size: 22px;
+        }
     }
 }
 
@@ -183,6 +201,10 @@
     .historical-dates {
         &__wrapper {
             height: 568px;
+        }
+
+        &__period-name {
+            font-size: 18px;
         }
     }
 }
