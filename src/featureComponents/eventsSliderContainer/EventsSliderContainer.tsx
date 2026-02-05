@@ -16,7 +16,7 @@ const EventsSliderContainer: React.FC<TEventsSliderContainer> = ({listEvents, is
         if (!containerRef.current) return;
 
         if (isAnimated) {
-            gsap.to(containerRef.current, {
+            gsap.set(containerRef.current, {
                 opacity: 0,
                 y: 10,
                 duration: 0.5
